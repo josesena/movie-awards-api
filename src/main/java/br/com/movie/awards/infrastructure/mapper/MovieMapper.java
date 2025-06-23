@@ -1,7 +1,7 @@
 package br.com.movie.awards.infrastructure.mapper;
 
-import br.com.movie.awards.domain.dto.MovieDTO;
 import br.com.movie.awards.domain.model.Movie;
+import br.com.movie.awards.infrastructure.csv.dto.MovieDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

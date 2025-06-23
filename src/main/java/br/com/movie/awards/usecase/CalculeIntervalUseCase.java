@@ -1,7 +1,7 @@
 package br.com.movie.awards.usecase;
 
-import br.com.movie.awards.domain.dto.IntervalResponse;
+import br.com.movie.awards.adapter.rest.dto.AwardsIntervalResponse;
 
 public interface CalculeIntervalUseCase {
-    IntervalResponse execute();
+    AwardsIntervalResponse execute();
 }

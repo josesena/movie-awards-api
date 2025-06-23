@@ -1,7 +1,7 @@
 package br.com.movie.awards.adapter.rest;
 
 
-import br.com.movie.awards.domain.dto.IntervalResponse;
+import br.com.movie.awards.adapter.rest.dto.AwardsIntervalResponse;
 import br.com.movie.awards.usecase.CalculeIntervalUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,7 +18,7 @@ public class AwardsIntervalController {
     private final CalculeIntervalUseCase calculeIntervalUseCase;
 
     @GetMapping(path = "/intervals", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<IntervalResponse> getInterval(){
+    public ResponseEntity<AwardsIntervalResponse> getInterval(){
         return ResponseEntity.ok(calculeIntervalUseCase.execute());
     }
 }

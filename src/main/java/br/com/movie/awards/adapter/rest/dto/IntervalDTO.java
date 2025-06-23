@@ -1,4 +1,4 @@
-package br.com.movie.awards.domain.dto;
+package br.com.movie.awards.adapter.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class Interval {
+public class IntervalDTO {
 
     private String producer;
     private Integer interval;

@@ -1,4 +1,4 @@
-package br.com.movie.awards.domain.dto;
+package br.com.movie.awards.infrastructure.csv.dto;
 
 import lombok.Builder;
 import lombok.Getter;
