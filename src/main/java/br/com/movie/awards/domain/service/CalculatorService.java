@@ -1,7 +1,7 @@
 package br.com.movie.awards.domain.service;
 
 import br.com.movie.awards.adapter.rest.dto.AwardsIntervalResponse;
-import br.com.movie.awards.adapter.rest.dto.IntervalDTO;
+import br.com.movie.awards.adapter.rest.dto.IntervalDto;
 import br.com.movie.awards.infrastructure.csv.dto.MovieDTO;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 @Service
 public class CalculatorService {
 
-    public List<IntervalDTO> calculateIntervals(List<MovieDTO> winners) {
+    public List<IntervalDto> calculateIntervals(List<MovieDTO> winners) {
         var producerWins = winners.stream()
                 .flatMap(movie -> Arrays.stream(movie.getProducers().split("(,| and )"))
                         .map(String::trim)
@@ -31,7 +31,7 @@ public class CalculatorService {
                     var producer = entry.getKey();
 
                     return IntStream.range(1, sortedYears.size())
-                            .mapToObj(i -> IntervalDTO.builder()
+                            .mapToObj(i -> IntervalDto.builder()
                                     .producer(producer)
                                     .interval(sortedYears.get(i) - sortedYears.get(i - 1))
                                     .previousWin(sortedYears.get(i - 1))
@@ -41,9 +41,9 @@ public class CalculatorService {
                 .toList();
     }
 
-    public AwardsIntervalResponse toResponse(List<IntervalDTO> intervals) {
-        var min = intervals.stream().mapToInt(IntervalDTO::getInterval).min().orElse(0);
-        var max = intervals.stream().mapToInt(IntervalDTO::getInterval).max().orElse(0);
+    public AwardsIntervalResponse toResponse(List<IntervalDto> intervals) {
+        var min = intervals.stream().mapToInt(IntervalDto::getInterval).min().orElse(0);
+        var max = intervals.stream().mapToInt(IntervalDto::getInterval).max().orElse(0);
 
         var minList = intervals.stream().filter(i -> i.getInterval() == min).toList();
         var maxList = intervals.stream().filter(i -> i.getInterval() == max).toList();

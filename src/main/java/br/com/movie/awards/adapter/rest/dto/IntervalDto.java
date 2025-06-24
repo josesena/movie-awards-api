@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class IntervalDTO {
+public class IntervalDto {
 
     private String producer;
     private Integer interval;

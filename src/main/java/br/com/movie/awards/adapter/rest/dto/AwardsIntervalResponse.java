@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AwardsIntervalResponse {
 
-    private List<IntervalDTO> min;
-    private List<IntervalDTO> max;
+    private List<IntervalDto> min;
+    private List<IntervalDto> max;
 
 }
