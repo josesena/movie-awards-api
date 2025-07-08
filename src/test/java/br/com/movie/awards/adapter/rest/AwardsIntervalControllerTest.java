@@ -5,13 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.StreamUtils;
+
+import java.nio.charset.StandardCharsets;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,6 +39,18 @@ class MovieAwardsApiApplicationTests {
 				.andExpect(jsonPath("$.max[?(@.producer == 'Matthew Vaughn')].interval", contains(13)))
 				.andExpect(jsonPath("$.max[?(@.producer == 'Matthew Vaughn')].previousWin", contains(2002)))
 				.andExpect(jsonPath("$.max[?(@.producer == 'Matthew Vaughn')].followingWin", contains(2015)));
+	}
+	@Test
+	@DisplayName("Deve validar resposta exata baseada no arquivo movielist-test.csv")
+	void shouldMatchExactJsonOutputFromCsv() throws Exception {
+		String expectedJson = StreamUtils.copyToString(
+				new ClassPathResource("movie-expected.json").getInputStream(),
+				StandardCharsets.UTF_8
+		);
+
+		mockMvc.perform(get("/awards/intervals"))
+				.andExpect(status().isOk())
+				.andExpect(content().json(expectedJson, true));
 	}
 
 }
